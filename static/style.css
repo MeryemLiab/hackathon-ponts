@@ -385,7 +385,11 @@ body.dark-mode #trees-button {
   cursor: default;
 }
 
-
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
 
 
 /* Loader code taken from https://loading.io/css/ */
