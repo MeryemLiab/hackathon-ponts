@@ -120,6 +120,8 @@ body {
 
 /* début */
 
+
+
 /* Style du bouton pour activer le mode sombre */
 .dark-mode-btn {
   position: fixed;
@@ -135,6 +137,8 @@ body {
   font-size: 24px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+
 
 /* Mode sombre : Styles généraux */
 body.dark-mode .dark-mode-btn {
@@ -187,6 +191,9 @@ body.dark-mode #question-button {
   font-size: 24px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+
+
 
 .controlsZoomIn {
   position: fixed;
@@ -301,16 +308,85 @@ body.dark-mode #question-button {
   cursor: pointer;
 }
 
-
 /* FIN */
-
-
-
-
 
 .hidden {
   display: none;
 }
+
+.theme-container {
+  position: fixed;
+  right: 20px;
+  bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.round-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+/* Bouton principal "Thème" */
+#theme-button {
+  background-color: white;
+  color: black;
+  border: 1px solid var(--border-color);
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.visible {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Styles des boutons individuels */
+#books-button {
+  background-color: #c8f4d5;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+}
+
+#beach-button {
+  background-color: #c9e2f5;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+}
+
+#trees-button {
+  background-color: #dbbdff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+}
+
+/* Mode sombre : boutons désactivés */
+body.dark-mode #books-button,
+body.dark-mode #beach-button,
+body.dark-mode #trees-button {
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: default;
+}
+
+
+
 
 /* Loader code taken from https://loading.io/css/ */
 .loader {
