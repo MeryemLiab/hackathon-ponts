@@ -196,6 +196,7 @@ const handleDClick = async (event) => {
 DButton.addEventListener("click", handleDClick);
 
 
+
 // Sauvegarder les messages dans le localStorage
 function saveMessage(question, response) {
   let messages = JSON.parse(localStorage.getItem('messages')) || [];
@@ -237,6 +238,31 @@ window.onload = function () {
     }
   });
 };
+
+function changeBackground(imageUrl) {
+  if (!document.body.classList.contains("dark-mode")) {
+    document.body.style.backgroundImage = `url(${imageUrl})`;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+  }
+}
+
+document.getElementById("books-button").addEventListener("click", function () {
+  changeBackground('https://i.pinimg.com/236x/25/c8/e6/25c8e63a547ae3195d23fa682337d7c2.jpg');
+});
+
+document.getElementById("beach-button").addEventListener("click", function () {
+  changeBackground('https://i.pinimg.com/236x/71/5b/ba/715bba198259cc620f57eb28a2cd6ad3.jpg');
+});
+
+document.getElementById("trees-button").addEventListener("click", function () {
+  changeBackground('https://i.pinimg.com/736x/af/40/4b/af404b4a88e60e22dc2e1fffa9d18370.jpg');
+});
+
+document.getElementById("theme-button").addEventListener("click", function () {
+  const themeOptions = document.getElementById("theme-options");
+  themeOptions.classList.toggle("visible");
+});
 
 
 
