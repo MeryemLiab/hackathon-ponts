@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <title>Ma page</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+
+<body>
+  <main class="main-container">
+    <header class="header">
+      <h1 class="header-title">Mon A.I.de mémoire</h1>
+    </header>
+
+    <section id="messages-container" class="messages-container">
+      <div class="message message-ai">
+        Je suis ton AIssistant de cours personnel ! Pose-moi une question sur
+        le cours et je te répondrai.
+      </div>
+    </section>
+
+    <form id="prompt-form" class="prompt-container">
+      <label for="prompt" class="prompt-label">Message</label>
+
+      <input type="text" id="prompt" name="prompt" class="prompt-input" autocomplete="off" />
+
+      <button type="submit" class="button" id="submit-button">Envoyer</button>
+
+      <button type="button" class="button" id="question-button">
+        Pose-moi une question !
+      </button>
+      <button type="button" class="button" id="qcm-button">
+        QCM
+      </button>
+    </form>
+
+    <form id="qcm-form" class="qcm-container hidden" method="'GET'">
+      <label for="prompt" class="qcm-label">Choisir une réponse :</label>
+      <button type="submit" class="button" id="A-button">A</button>
+      <button type="submit" class="button" id="B-button">B</button>
+      <button type="submit" class="button" id="C-button">C</button>
+      <button type="submit" class="button" id="D-button">D</button>
+    </form>
+
+    <!-- Bouton pour activer le mode dark -->
+    <button id="dark-mode-toggle" class="dark-mode-btn">🌙</button>
+    <button id="clear-button">🧹</button>
+
+    <button id="zoomIn" class="controlsZoomIn">+</button>
+    <button id="zoomOut" class="controlsZoomOut">-</button>
+
+    <!-- FIN -->
+
+    <script src="{{ url_for('static', filename='prompt.js') }}"></script>
+  </main>
+</body>
+
+</html>

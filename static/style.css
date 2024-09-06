@@ -1,0 +1,381 @@
+:root {
+  --body-background-color: #f5f6f8;
+  --main-background-color: #ffffff;
+  --main-color: #2a303b;
+  --max-body-width: 700px;
+  --border-color: #cccccc;
+  --secondary-color: #fff6d3;
+  --loader-bullet-size: 6px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body.dark-mode {
+  --body-background-color: #272525;
+  --main-background-color: #322f2f;
+  --main-color: #e0e0e0;
+  --secondary-color: #4b4949;
+  --border-color: #514d4d;
+}
+
+
+body {
+  background-color: var(--body-background-color);
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.main-container {
+  max-width: var(--max-body-width);
+  min-height: 100vh;
+  background-color: var(--main-background-color);
+  color: var(--main-color);
+  padding: 50px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+}
+
+.header-title {
+  margin-top: 0;
+}
+
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.message {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 10px 15px;
+}
+
+.message-human {
+  background-color: var(--secondary-color);
+}
+
+.qcm-container {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--max-body-width);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--main-background-color);
+  padding: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.prompt-container {
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--max-body-width);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--main-background-color);
+  padding: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.qcm-label {
+  font-weight: bold;
+}
+
+.prompt-label {
+  font-weight: bold;
+}
+
+.prompt-input {
+  flex-grow: 1;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.button {
+  border: 1px solid var(--border-color);
+  padding: 5px;
+  border-radius: 5px;
+  background-color: var(--main-background-color);
+}
+
+.button:hover,
+.button:active {
+  background-color: var(--body-background-color);
+  cursor: pointer;
+}
+
+/* début */
+
+/* Style du bouton pour activer le mode sombre */
+.dark-mode-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--main-background-color);
+  color: var(--main-color);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  font-size: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Mode sombre : Styles généraux */
+body.dark-mode .dark-mode-btn {
+  background-color: var(--main-background-color);
+  color: var(--main-color);
+}
+
+body.dark-mode .message {
+  color: var(--main-color);
+  /* Couleur du texte des messages en mode sombre */
+}
+
+body.dark-mode .loader div {
+  background-color: var(--main-color);
+  /* Couleur des éléments du loader en mode sombre */
+}
+
+/* Boutons */
+
+/* Bouton "Envoyer" */
+#submit-button {
+  color: var(--main-color);
+  /* Couleur du texte du bouton "Envoyer" */
+}
+
+/* Bouton "Pose-moi une question" */
+#question-button {
+  color: var(--main-color);
+  /* Couleur du texte du bouton "Pose-moi une question" */
+}
+
+/* Mode sombre : Couleur du texte des boutons */
+body.dark-mode #submit-button,
+body.dark-mode #question-button {
+  color: var(--main-color);
+  /* Couleur du texte en mode sombre pour les deux boutons */
+}
+
+#clear-button {
+  position: fixed;
+  top: 210px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--main-background-color);
+  color: var(--main-color);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  font-size: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.controlsZoomIn {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--main-background-color);
+
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  /* Utilisation de Flexbox */
+  align-items: center;
+  /* Centre le contenu verticalement */
+  justify-content: center;
+  /* Centre le contenu horizontalement */
+  text-align: center;
+  /* Centre le texte horizontalement */
+}
+
+#ZoomIn {
+  background-color: inherit;
+  /* Prend la couleur de fond du conteneur */
+  color: inherit;
+  /* Prend la couleur du texte du conteneur */
+  border: none;
+  /* Retire les bordures du bouton */
+  font-size: inherit;
+  /* Assure que la taille de la police correspond à celle du conteneur */
+  display: flex;
+  /* Utilisation de Flexbox */
+  align-items: center;
+  /* Centre les icônes verticalement */
+  justify-content: center;
+  /* Centre les icônes horizontalement */
+}
+
+#ZoomIn .fa-search-plus {
+  margin-right: 5px;
+  /* Espacement entre l'icône et le symbole plus */
+}
+
+
+.controlsZoomOut {
+  position: fixed;
+  top: 150px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--main-background-color);
+
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  font-size: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  /* Utilisation de Flexbox */
+  align-items: center;
+  /* Centre le contenu verticalement */
+  justify-content: center;
+  /* Centre le contenu horizontalement */
+  text-align: center;
+  /* Centre le texte horizontalement */
+  display: flex;
+  /* Utilisation de Flexbox */
+  align-items: center;
+  /* Centre le contenu verticalement */
+  justify-content: center;
+  /* Centre le contenu horizontalement */
+  text-align: center;
+  /* Centre le texte horizontalement */
+}
+
+#ZoomOut {
+  background-color: inherit;
+  /* Prend la couleur de fond du conteneur */
+  color: inherit;
+  /* Prend la couleur du texte du conteneur */
+  border: none;
+  /* Retire les bordures du bouton */
+  font-size: inherit;
+  /* Assure que la taille de la police correspond à celle du conteneur */
+  display: flex;
+  /* Utilisation de Flexbox */
+  align-items: center;
+  /* Centre les icônes verticalement */
+  justify-content: center;
+  /* Centre les icônes horizontalement */
+}
+
+#ZoomOut .fa-search-minus {
+  margin-right: 5px;
+  /* Espacement entre l'icône et le symbole moins */
+}
+
+.button {
+  border: 1px solid var(--border-color);
+  padding: 5px;
+  border-radius: 5px;
+  background-color: var(--main-background-color);
+}
+
+.button:hover,
+.button:active {
+  background-color: var(--body-background-color);
+  cursor: pointer;
+}
+
+
+/* FIN */
+
+
+
+
+
+.hidden {
+  display: none;
+}
+
+/* Loader code taken from https://loading.io/css/ */
+.loader {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: var(--loader-bullet-size);
+}
+
+.loader div {
+  position: absolute;
+  top: 0;
+  width: var(--loader-bullet-size);
+  height: var(--loader-bullet-size);
+  border-radius: 50%;
+  background-color: var(--main-color);
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.loader div:nth-child(1) {
+  left: calc(var(--loader-bullet-size) * 0.5);
+  animation: loader1 0.6s infinite;
+}
+
+.loader div:nth-child(2) {
+  left: calc(var(--loader-bullet-size) * 0.5);
+  animation: loader2 0.6s infinite;
+}
+
+.loader div:nth-child(3) {
+  left: calc(var(--loader-bullet-size) * 2.5);
+  animation: loader2 0.6s infinite;
+}
+
+.loader div:nth-child(4) {
+  left: calc(var(--loader-bullet-size) * 4);
+  animation: loader3 0.6s infinite;
+}
+
+@keyframes loader1 {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes loader3 {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes loader2 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(calc(var(--loader-bullet-size) * 2), 0);
+  }
+}
