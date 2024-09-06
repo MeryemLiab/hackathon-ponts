@@ -1,59 +1,62 @@
-from flask import Flask , render_template , request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect
 
 from flask_sqlalchemy import SQLAlchemy
 
 from src.utils.ask_question_to_pdf import ask_question_to_pdf
 
 
-
 app = Flask(__name__)
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///messages.db'
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///messages.db"
 db = SQLAlchemy(app)
+
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String(200), nullable=False)
     response = db.Column(db.String(200), nullable=False)
 
+
 with app.app_context():
     db.create_all()
 
-@app.route('/submit', methods=['POST'])
+
+@app.route("/submit", methods=["POST"])
 def submit():
-    question = request.form['question']
-    response = process_question(question)  # Remplace par ton traitement
-    
+    question = request.form["question"]
+    pdf_path = "/Users/merye/hackathon/hackathon-ponts/src/utils/filename.pdf"
+    response = ask_question_to_pdf(pdf_path, question)  # Remplace par ton traitement
+
     # Enregistrer dans la base de données
     msg = Message(question=question, response=response)
     db.session.add(msg)
     db.session.commit()
-    
-    return redirect('/')
 
-@app.route('/')
+    return redirect("/")
+
+
+@app.route("/")
 def index():
     messages = Message.query.all()
-    return render_template('index.html', messages=messages)
-
-#@app.route("/")
-#def hello_world(name=None):
-    #return render_template("index.html", name=name)
+    return render_template("index.html", messages=messages)
 
 
+# @app.route("/")
+# def hello_world(name=None):
+# return render_template("index.html", name=name)
 
-@app.route("/prompt" , methods=['POST'])
+
+@app.route("/prompt", methods=["POST"])
 def prompt_response():
-    #return {"answer": request.form['prompt']}
-    user_prompt = request.form['prompt']
+    # return {"answer": request.form['prompt']}
+    user_prompt = request.form["prompt"]
     pdf_path = "/Users/merye/hackathon/hackathon-ponts/src/utils/filename.pdf"
     answer = ask_question_to_pdf(pdf_path, user_prompt)
     return {"answer": answer}
 
 
-
-@app.route("/question" , methods=['GET'])
+@app.route("/question", methods=["GET"])
 def ask_question():
     qst = "poses moi une question concernant le texte"
     pdf_path = "/Users/merye/hackathon/hackathon-ponts/src/utils/filename.pdf"
@@ -61,15 +64,24 @@ def ask_question():
     return {"answer": answer}
 
 
-@app.route("/answer" , methods=['POST'])
-def answered_question():    
-
+@app.route("/answer", methods=["POST"])
+def answered_question():
     pdf_path = "/Users/merye/hackathon/hackathon-ponts/src/utils/filename.pdf"
 
-    #answer = ask_question_to_pdf(pdf_path, request.form['prompt'])
+    # answer = ask_question_to_pdf(pdf_path, request.form['prompt'])
 
-    answ = " est-ce que ma réponse " + " " + request.form['prompt'] + " " + "à cette question" + " " + request.form['question'] + " " + "est juste ?"
-    
+    answ = (
+        " est-ce que ma réponse "
+        + " "
+        + request.form["prompt"]
+        + " "
+        + "à cette question"
+        + " "
+        + request.form["question"]
+        + " "
+        + "est juste ?"
+    )
+
     return {"answer": ask_question_to_pdf(pdf_path, answ)}
 
 
@@ -82,7 +94,7 @@ def qcm():
     pdf_path = "/Users/merye/hackathon/hackathon-ponts/src/utils/filename.pdf"
 
     if pdf_path:
-        answer = ask_question_to_pdf( pdf_path , qst )
+        answer = ask_question_to_pdf(pdf_path, qst)
     else:
         return "No uploaded file available", 400
     global a
@@ -97,7 +109,7 @@ def A():
     pdf_path = "/Users/merye/hackathon/hackathon-ponts/src/utils/filename.pdf"
 
     if pdf_path:
-        answer = ask_question_to_pdf( pdf_path , qst )
+        answer = ask_question_to_pdf(pdf_path, qst)
     else:
         return "No uploaded file available", 400
     return {"answer": answer}
@@ -110,7 +122,7 @@ def B():
     pdf_path = "/Users/merye/hackathon/hackathon-ponts/src/utils/filename.pdf"
 
     if pdf_path:
-        answer = ask_question_to_pdf( pdf_path , qst )
+        answer = ask_question_to_pdf(pdf_path, qst)
     else:
         return "No uploaded file available", 400
     return {"answer": answer}
@@ -123,7 +135,7 @@ def C():
     pdf_path = "/Users/merye/hackathon/hackathon-ponts/src/utils/filename.pdf"
 
     if pdf_path:
-        answer = ask_question_to_pdf( pdf_path , qst )
+        answer = ask_question_to_pdf(pdf_path, qst)
     else:
         return "No uploaded file available", 400
     return {"answer": answer}
@@ -136,10 +148,7 @@ def D():
     pdf_path = "/Users/merye/hackathon/hackathon-ponts/src/utils/filename.pdf"
 
     if pdf_path:
-        answer = ask_question_to_pdf( pdf_path , qst )
+        answer = ask_question_to_pdf(pdf_path, qst)
     else:
         return "No uploaded file available", 400
     return {"answer": answer}
-
-
-
