@@ -1,9 +1,13 @@
 from io import StringIO
 import os
 import fitz
-import openai
+import openai 
 from dotenv import load_dotenv
 from nltk.tokenize import sent_tokenize
+
+import PyPDF2 
+
+load_dotenv()
 
 load_dotenv()
 
@@ -66,6 +70,38 @@ def split_text(text, chunk_size=5000):
     return chunks
 
 
+###########################
+def gpt3_completion(prompt):
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": prompt}
+            ],
+        )
+        return response['choices'][0]['message']['content'].strip()
+    except Exception as e:
+        print(f"Une erreur s'est produite lors de l'appel à l'API OpenAI : {e}")
+        return None
+       
+
+
+def ask_question_to_pdf(pdf_path, question="Peux-tu me résumer ce texte ?"):
+
+    text = read_pdf(pdf_path)
+    prompt = f"{text}\n\n{question}"
+    return gpt3_completion(prompt)
+    
+#####################################
+
 filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
 document = read_pdf(filename)
 chunks = split_text(document)
+
+#if __name__=="__main__":
+    #pdf_path = "/Users/merye/hackathon/hackathon-ponts/src/utils/filename.pdf"
+    #pdf_path= "/Users/merye/Downloads/journal de bord.pdf"
+    #response = ask_question_to_pdf(pdf_path, "Peux-tu me résumer ce texte ?")
+    #print(response)
+
